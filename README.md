@@ -1,4 +1,4 @@
-# stellar-implimentation
+# stellar-walet-test
 move money and access new markets.
 intended to enhance rather than undermine or replace the existing financial system.
 
