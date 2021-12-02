@@ -1,26 +1,23 @@
 # stellar-wallet-test
-Run the project from the stellar root folder.
+Terminal Installation.
 
-cd stellar
+1. Make the installer executable.
 
-Setup:
+chmod +x install.sh
 
-pip3 freeze > requirements.txt
+2. Run the installer.
 
-pip3 install django==3.2.9
+./setup.sh
 
-pip3 install -U stellar-sdk
+The project runs at project-gitpod.io/wallet
 
-pip3 install qrcode[pil]
-
-python3 manage.py runserver 8000
-
-
+Why Stellar Network?
 Move money and access new markets.
 Intended to enhance rather than undermine or replace the existing financial system.
 
+How to create an account?
 A valid keypair does not make an account: in order to prevent unused accounts from bloating the ledger, Stellar requires accounts to hold a minimum balance of 1 XLM before they actually exist. Until it gets a bit of funding, your keypair doesn’t warrant space on the ledger.
 
-Current Status
-
+Current Project Status
+NO UI
 Functionality available for users to create and activate a wallet in the stellar network.
