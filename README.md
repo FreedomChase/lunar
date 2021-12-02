@@ -7,7 +7,7 @@ chmod +x install.sh
 
 2. Run the installer.
 
-./setup.sh
+./install.sh
 
 The project runs at project-gitpod.io/wallet
 
