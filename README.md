@@ -3,7 +3,17 @@ Run the project from the stellar root folder.
 
 cd stellar
 
-python3 manage.py runserver
+Setup:
+
+pip3 freeze > requirements.txt
+
+pip3 install django==3.2.9
+
+pip install -U stellar-sdk
+
+pip install qrcode[pil]
+
+python3 manage.py runserver 8000
 
 
 Move money and access new markets.
