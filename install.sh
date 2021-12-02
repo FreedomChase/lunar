@@ -12,4 +12,4 @@ pip3 install qrcode[pil]
 
 python3 manage.py migrate
 
-python3 manage.py runserver
+python3 manage.py runserver 8001
