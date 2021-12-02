@@ -1,6 +1,8 @@
 # stellar-wallet-test
 Run the project from the stellar root folder.
+
 cd stellar
+
 python3 manage.py runserver
 
 
