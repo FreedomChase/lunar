@@ -9,8 +9,6 @@ chmod +x install.sh
 
 ./install.sh
 
-The project runs at project-gitpod.io/wallet
-
 Why Stellar Network?
 Move money and access new markets.
 Intended to enhance rather than undermine or replace the existing financial system.
@@ -18,6 +16,14 @@ Intended to enhance rather than undermine or replace the existing financial syst
 How to create an account?
 A valid keypair does not make an account: in order to prevent unused accounts from bloating the ledger, Stellar requires accounts to hold a minimum balance of 1 XLM before they actually exist. Until it gets a bit of funding, your keypair doesn’t warrant space on the ledger.
 
-Current Project Status
-NO UI
-Functionality available for users to create and activate a wallet in the stellar network.
+Current Project Status:
+
+Minimal UI added.
+
+Functionality available:
+
+Create a wallet in the stellar network.
+
+Login to an existing wallet
+
+View Assets and Balances
