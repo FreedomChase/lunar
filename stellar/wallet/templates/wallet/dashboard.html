@@ -2,14 +2,17 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-2">
-            <img style="width:100%" src="{{qr}}" alt="" />
+    <div class="row top-title">
+        <div class="col-4">
+            <img style="width:100%" src="{{request.session.session_data.qr}}" alt="" />
         </div>
-        <div class="col-10">
-            <h5>Your Wallet Account ID</h5>
-            <h6><i class="bi-wallet-fill"></i> {{id}}</h6>
+        <div class="col-8">
+            
+            <h1 class="highlight">Your Wallet</h1>
             <small>To receive payments, share your account ID or scan QR code.</small>
+        </div>
+        <div class="col address">
+            <div>{{request.session.session_data.id}}</div>
         </div>
     </div>
     <div class="row">
@@ -22,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for data in request.session.balances %}
+                {% for data in request.session.session_data.balances %}
                 <tr>
                     <td>{{ data.asset_code }}</td>
                     <td>{{ data.balance }}</td>
@@ -33,7 +36,7 @@
         </table>
     </div>
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-xl-12 border">
             <h4>Where is the money stored?</h4>
             <small>On the Stellar network, funds exist on the network and can only be moved by whoever has the
                 secret
@@ -47,7 +50,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-6"><small>The Stellar network requires accounts to maintain a minimum balance. A 1 XLM
+        <div class="col-xl-6 border margin-top-10"><small>The Stellar network requires accounts to maintain a minimum balance. A 1 XLM
                 minimum balance is required with an additional requirement 0.5 XLM for each entry in the account
                 such as a trustline or offer.
 
@@ -58,26 +61,26 @@
                 <b>To decrease your minimum balance</b>, you can remove an existing offer or unaccept an
                 asset.</small>
         </div>
-        <div class="col-xl-6">
+        <div class="col-xl-6 margin-top-10 margin-bottom-30 border">
             <div class="row">
-                <div class="col-md-8">Base reserve</div>
-                <div class="col-md-4">1 XLM</div>
+                <div class="col">Base reserve</div>
+                <div class="col">1 XLM</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Extra</div>
-                <div class="col-md-4">0.5 XLM</div>
+                <div class="col">Extra</div>
+                <div class="col">0.5 XLM</div>
             </div>
             <div class="row">
-                <div class="col-md-8">XLM in active offers</div>
-                <div class="col-md-4">0 XLM</div>
+                <div class="col">XLM in active offers</div>
+                <div class="col">0 XLM</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Trustlines</div>
-                <div class="col-md-4">? XLM</div>
+                <div class="col">Trustlines</div>
+                <div class="col">? XLM</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Offers</div>
-                <div class="col-md-4">0 XLM</div>
+                <div class="col">Offers</div>
+                <div class="col">0 XLM</div>
             </div>
         </div>
     </div>

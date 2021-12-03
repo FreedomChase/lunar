@@ -45,7 +45,7 @@ def activate(request):
     template = 'wallet/activate.html'
     horizon_url = settings.HORIZON_LIVE
     server = Server(horizon_url)
-    media_dir = 'media/'
+    media_dir = './media/'
 
     try:
         # Create media folder if not available: We will store wallet qr-codes during user session
@@ -61,14 +61,12 @@ def activate(request):
     public_key = new_account.public_key
     # Check if the new account exists on the stellar network.
     
-    QRurl = '../' + media_dir + public_key + ".png"
-
+    QRurl = '.' + media_dir + public_key + ".png"
+    # Active Account: get data
     try:
-        # Active Account: get data
         account = requests.get(account_url + public_key, data={})
         qr_from_key(public_key, media_dir)
         data = account.json()
-
         # Store some variables in the session
         request.session['wallet_id'] = data['id']
         request.session['transactions_url'] = string_cleaner(
@@ -97,7 +95,7 @@ def activate(request):
             'balances': data['balances']
         }
         request.session['session_data'] = data_context
-        return redirect('dashboard')
+        return redirect('/dashboard/')
     except exceptions.NotFoundError:
         # Inactive Account
         # It has to funded with the minimum balance of 5 XML before activation.

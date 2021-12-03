@@ -1,0 +1,43 @@
+body, h1, h2, h3, h4, h5, h6{
+    font-weight:100!important;
+}
+
+header.page-header {
+    background: navy;
+    height: 50px;
+}
+header.page-header i {
+    font-size: 36px;
+    color: #fff;
+}
+
+.address {
+    font-size: x-small;
+    border-bottom: 1px solid #000080;
+    padding-bottom: 10px;
+    font-weight: bold;
+    padding-left: 4px;
+    padding-top: 4px;
+    color: navy;
+}
+
+.top-title {
+    padding-top:5px;
+}
+
+.margin-top-10 {
+    margin-top: 15px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+.border {
+    border: 1px solid #000080;
+}
+
+h1.highlight, .highlight {
+    color: #000080;
+    font-weight:100;
+}
