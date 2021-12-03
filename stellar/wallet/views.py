@@ -9,6 +9,7 @@ import requests
 
 account_url = settings.HORIZON_LIVE + '/accounts/'
 
+
 def index(request):
     template = 'wallet/home.html'
     return render(request, template, {})
@@ -60,54 +61,53 @@ def activate(request):
     # Begin account activation.
     public_key = new_account.public_key
     # Check if the new account exists on the stellar network.
-    
-    QRurl = '.' + media_dir + public_key + ".png"
-    # Active Account: get data
-    try:
-        account = requests.get(account_url + public_key, data={})
-        qr_from_key(public_key, media_dir)
-        data = account.json()
-        # Store some variables in the session
-        request.session['wallet_id'] = data['id']
-        request.session['transactions_url'] = string_cleaner(
-            data['_links']['transactions']['href'])
-        request.session['operations_url'] = string_cleaner(
-            data['_links']['operations']['href'])
-        request.session['payments_url'] = string_cleaner(
-            data['_links']['payments']['href'])
-        request.session['effects_url'] = string_cleaner(
-            data['_links']['effects']['href'])
-        request.session['offers_url'] = string_cleaner(
-            data['_links']['offers']['href'])
-        request.session['trades_url'] = string_cleaner(
-            data['_links']['trades']['href'])
-        request.session['data_url'] = string_cleaner(
-            data['_links']['data']['href'])
 
-        for asset in data['balances']:
-            if asset['asset_type'] == 'native':
-                asset['asset_code'] = 'XLM'
-
-        data_context = {
-            'id': data['id'],
-            'qr': QRurl,
-            'last_modified': data['last_modified_time'],
-            'balances': data['balances']
-        }
-        request.session['session_data'] = data_context
-        return redirect('/dashboard/')
-    except exceptions.NotFoundError:
-        # Inactive Account
-        # It has to funded with the minimum balance of 5 XML before activation.
-        # Generate QR code and deposit instructions
-        qr_from_key(public_key, media_dir)
-
+    QRurl = media_dir + public_key + ".png"
+    qr_from_key(public_key, media_dir)
     # Load required variables into template
     instruct_context = {
         'public_key': public_key,
         'qr': QRurl
     }
-    return render(request, template, instruct_context)
+    # Inactive Account:
+    # It has to funded with the minimum balance of 5 XML before activation.
+    # Generate QR code and deposit instructions
+    account = requests.get(account_url + public_key, data={})
+    data = account.json()
+    if data['status'] == 404:
+        return render(request, template, instruct_context)
+
+    # Inactive Account
+    data = account.json()
+    # Store some variables in the session
+    request.session['wallet_id'] = data['id']
+    request.session['transactions_url'] = string_cleaner(
+        data['_links']['transactions']['href'])
+    request.session['operations_url'] = string_cleaner(
+        data['_links']['operations']['href'])
+    request.session['payments_url'] = string_cleaner(
+        data['_links']['payments']['href'])
+    request.session['effects_url'] = string_cleaner(
+        data['_links']['effects']['href'])
+    request.session['offers_url'] = string_cleaner(
+        data['_links']['offers']['href'])
+    request.session['trades_url'] = string_cleaner(
+        data['_links']['trades']['href'])
+    request.session['data_url'] = string_cleaner(
+        data['_links']['data']['href'])
+
+    for asset in data['balances']:
+        if asset['asset_type'] == 'native':
+            asset['asset_code'] = 'XLM'
+
+    data_context = {
+        'id': data['id'],
+        'qr': QRurl,
+        'last_modified': data['last_modified_time'],
+        'balances': data['balances']
+    }
+    request.session['session_data'] = data_context
+    return redirect('/dashboard/')
 
 
 def qr_from_key(key, location):

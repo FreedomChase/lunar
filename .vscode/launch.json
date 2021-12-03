@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/stellar/manage.py",
             "args": [
-                "runserver"
+                "runserver", "8001"
             ],
             "django": true
         }

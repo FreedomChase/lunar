@@ -41,3 +41,11 @@ h1.highlight, .highlight {
     color: #000080;
     font-weight:100;
 }
+
+small.sm-txt {
+    font-size:10px!important;
+}
+
+.center-text {
+    text-align: center!important;
+}
