@@ -1,4 +1,4 @@
-#Lunar Server
+# Lunar Server
 
 Terminal Installation.
 
