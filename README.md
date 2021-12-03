@@ -1,4 +1,5 @@
-# stellar-wallet-test
+#Lunar Server
+
 Terminal Installation.
 
 1. Make the installer executable.
