@@ -51,9 +51,12 @@ def activate(request):
     # Begin account activation.
     public_key = new_account.public_key
     # Check if the new account exists on the stellar network.
+    
+    QRurl = '../' + media_dir + public_key + ".png"
 
     try:
         # Active Account: get data
+        qr_from_key(public_key, media_dir)
         account = requests.get(account_url + public_key, data={})
         data = account.json()
 
@@ -74,8 +77,13 @@ def activate(request):
         request.session['data_url'] = string_cleaner(
             data['_links']['data']['href'])
 
+        for asset in data['balances']:
+            if asset['asset_type'] == 'native':
+                asset['asset_code'] = 'XLM'
+
         data_context = {
             'id': data['id'],
+            'qr': QRurl,
             'last_modified': data['last_modified_time'],
             'balances': data['balances']
         }
@@ -85,17 +93,20 @@ def activate(request):
         # Inactive Account
         # It has to funded with the minimum balance of 5 XML before activation.
         # Generate QR code and deposit instructions
-        img = qrcode.make(public_key)
-        type(img)  # qrcode.image.pil.PilImage
-        img.save(media_dir + public_key + ".png")
+        qr_from_key(public_key, media_dir)
 
-    QRurl = '../' + media_dir + public_key + ".png"
     # Load required variables into template
     instruct_context = {
         'public_key': public_key,
         'qr': QRurl
     }
     return render(request, template, instruct_context)
+
+
+def qr_from_key(key, location):
+    img = qrcode.make(key)
+    type(img)  # qrcode.image.pil.PilImage
+    img.save(location + key + ".png")
 
 
 def string_cleaner(string):
