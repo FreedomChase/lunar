@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from stellar_sdk.keypair import Keypair
 from stellar_sdk import Server, exceptions
@@ -9,9 +9,13 @@ import requests
 
 account_url = settings.HORIZON_LIVE + '/accounts/'
 
-
 def index(request):
-    template = 'wallet/index.html'
+    template = 'wallet/home.html'
+    return render(request, template, {})
+
+
+def wallet(request):
+    template = 'wallet/wallet.html'
     return render(request, template, {})
 
 
@@ -29,6 +33,11 @@ def create(request):
 
 def account(request):
     template = 'wallet/account.html'
+    return render(request, template, {})
+
+
+def dashboard(request):
+    template = 'wallet/dashboard.html'
     return render(request, template, {})
 
 
@@ -56,8 +65,8 @@ def activate(request):
 
     try:
         # Active Account: get data
-        qr_from_key(public_key, media_dir)
         account = requests.get(account_url + public_key, data={})
+        qr_from_key(public_key, media_dir)
         data = account.json()
 
         # Store some variables in the session
@@ -87,8 +96,8 @@ def activate(request):
             'last_modified': data['last_modified_time'],
             'balances': data['balances']
         }
-        template = 'wallet/dashboard.html'
-        return render(request, template, data_context)
+        request.session['session_data'] = data_context
+        return redirect('dashboard')
     except exceptions.NotFoundError:
         # Inactive Account
         # It has to funded with the minimum balance of 5 XML before activation.

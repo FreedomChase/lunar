@@ -1,62 +1,85 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Interstellar</title>
-    <meta name="description" content="">
-    <meta name="author" content="Stellar">
-    <meta property="og:title" content="Your Wallet">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="image.png">
-    <link rel="icon" href="">
-    <link rel="icon" href="" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-</head>
-<body>
-    <div class="container">
+{% extends 'wallet/base.html' %}
 
-        <div class="row">
-            <div class="col-2">
-                <img style="width:100%" src="{{qr}}" alt="" />
-            </div>
-            <div class="col-10">
-                <h5>Your Wallet Account ID</h5>
-                <h6><i class="bi-wallet-fill"></i> {{id}}</h6>
-                <small>To receive payments, share your account ID or scan QR code.</small>
-            </div>
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <img style="width:100%" src="{{qr}}" alt="" />
         </div>
-        <div class="row">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Asset</th>
-                        <th scope="col">Balance</th>
-                        <th scope="col">Value (EUR)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for data in balances %}
-                    <tr>
-                        <td>{{ data.asset_code }}</td>
-                        <td>{{ data.balance }}</td>
-                        <td></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <div class="col-10">
+            <h5>Your Wallet Account ID</h5>
+            <h6><i class="bi-wallet-fill"></i> {{id}}</h6>
+            <small>To receive payments, share your account ID or scan QR code.</small>
         </div>
     </div>
-    <!-- your content here... -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Asset</th>
+                    <th scope="col">Balance</th>
+                    <th scope="col">Value (EUR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in request.session.balances %}
+                <tr>
+                    <td>{{ data.asset_code }}</td>
+                    <td>{{ data.balance }}</td>
+                    <td></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <h4>Where is the money stored?</h4>
+            <small>On the Stellar network, funds exist on the network and can only be moved by whoever has the
+                secret
+                key. This means that your secret key is extremely sensitive, and whoever has access to it can move
+                the funds. However, money is NOT actually "inside" Interstellar. Interstellar is a tool that helps
+                you use your secret key to make transactions.
+
+                <p><b>WARNING:</b> Be extremely careful with your secret key and do not share it with anybody.
+            </small></p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6"><small>The Stellar network requires accounts to maintain a minimum balance. A 1 XLM
+                minimum balance is required with an additional requirement 0.5 XLM for each entry in the account
+                such as a trustline or offer.
+
+                Each entry (asset accepted, offer, signer) increases your minimum balance by 0.5 XLM. Additionally,
+                Interstellar enforces a 0.5 XLM of extra minimum balance in an attempt to make sure your account can
+                still make transactions without going below the network minimum balance requirements.
+
+                <b>To decrease your minimum balance</b>, you can remove an existing offer or unaccept an
+                asset.</small>
+        </div>
+        <div class="col-xl-6">
+            <div class="row">
+                <div class="col-md-8">Base reserve</div>
+                <div class="col-md-4">1 XLM</div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">Extra</div>
+                <div class="col-md-4">0.5 XLM</div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">XLM in active offers</div>
+                <div class="col-md-4">0 XLM</div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">Trustlines</div>
+                <div class="col-md-4">? XLM</div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">Offers</div>
+                <div class="col-md-4">0 XLM</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

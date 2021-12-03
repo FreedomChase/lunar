@@ -1,71 +1,46 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Interstellar</title>
-        <meta name="description" content="">
-        <meta name="author" content="Stellar">
-        <meta property="og:title" content="Your Wallet">
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="">
-        <meta property="og:description" content="">
-        <meta property="og:image" content="image.png">
-        <link rel="icon" href="">
-        <link rel="icon" href="" type="image/svg+xml">
-        <link rel="apple-touch-icon" href="">
-        <!-- CSS only -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-    </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <p>New Stellar account<br>
-                    To get started using the Stellar network, a new unique keypair has been generated for you. Keypair
-                    represents the public and secret keys of your Stellar account..<br>
-                </p>
-                <label for="key" class="form-label">Your new public key: <br> <small>Used to identify an account and
-                        receive funds and will be used as your account ID.</small></label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3"><i class="bi-wallet-fill"></i></span>
-                    <input type="text" class="form-control" value="{{ public_key }}" id="key"
-                        aria-describedby="basic-addon3">
-                </div>
-                <label for="secret" class="form-label">Your new secret key:<br> <small>Used to access your account and
-                        make transactions. Anyone with the key will have full access to the account and funds. If you
-                        lose the key, you will no longer be able to access the funds and there is no recovery
-                        mechanism.</small></label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon3"><i class="bi-file-earmark-lock-fill"></i></span>
-                    <input type="text" class="form-control" value="{{ secret }}" id="secret"
-                        aria-describedby="basic-addon3">
-                    <span class="small">
-                        <p>The key is generated using entropy from TweetNaCl's randomByte function which, in most
-                            browsers, uses getRandomValues from the Web Cryptography API.
-                        </p>However, using a secure random number generation does not protect you from a compromised
-                        computer. Take great care to make sure your computer is secure and do not run this on a computer
-                        you do not trust.
-                    </span>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="0">
-                    <label class="form-check-label" for="inlineCheckbox2">
-                        I've backed up my secret key in a safe place
-                    </label>
-                </div>
-                <div class="row">
-                    <a href="account" class="btn btn-primary mb-3">Continue </a>
-                </div>
+{% extends 'wallet/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>New Stellar account<br>
+                To get started using the Stellar network, a new unique keypair has been generated for you. Keypair
+                represents the public and secret keys of your Stellar account..<br>
+            </p>
+            <label for="key" class="form-label">Your new public key: <br> <small>Used to identify an account and
+                    receive funds and will be used as your account ID.</small></label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3"><i class="bi-wallet-fill"></i></span>
+                <input type="text" class="form-control" value="{{ public_key }}" id="key"
+                    aria-describedby="basic-addon3">
+            </div>
+            <label for="secret" class="form-label">Your new secret key:<br> <small>Used to access your account and
+                    make transactions. Anyone with the key will have full access to the account and funds. If you
+                    lose the key, you will no longer be able to access the funds and there is no recovery
+                    mechanism.</small></label>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3"><i class="bi-file-earmark-lock-fill"></i></span>
+                <input type="text" class="form-control" value="{{ secret }}" id="secret"
+                    aria-describedby="basic-addon3">
+                <span class="small">
+                    <p>The key is generated using entropy from TweetNaCl's randomByte function which, in most
+                        browsers, uses getRandomValues from the Web Cryptography API.
+                    </p>However, using a secure random number generation does not protect you from a compromised
+                    computer. Take great care to make sure your computer is secure and do not run this on a computer
+                    you do not trust.
+                </span>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="0">
+                <label class="form-check-label" for="inlineCheckbox2">
+                    I've backed up my secret key in a safe place
+                </label>
+            </div>
+            <div class="row">
+                <a href="account" class="btn btn-primary mb-3">Continue </a>
             </div>
         </div>
     </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+</div>
+{% endblock %}
