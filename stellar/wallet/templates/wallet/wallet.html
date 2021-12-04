@@ -1,18 +1,18 @@
 {% extends 'wallet/base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <p>Manage Stellar account<br>
-                Fast access to your Stellar account. Discover new tokens
-                and market pairs, place orders and send funds in just a few clicks.<br>
-            </p>
-            <form method="post" action="../create" class="row g-3">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary mb-3">Generate Stellar Account </button>
-            </form>
-        </div>
+<div class="container top-pad-sm">
+    <div class="col">
+
+        <h1>Manage Stellar account</h1>
+            Fast access to your Stellar account. Discover new tokens
+            and market pairs, place orders and send funds in just a few clicks.<br>
+        </p>
+        <form method="post" action="../create" class="row g-3">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary mb-3">Generate Stellar Account </button>
+        </form>
+
     </div>
 </div>
 {% endblock %}

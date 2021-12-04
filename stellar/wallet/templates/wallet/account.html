@@ -1,27 +1,27 @@
 {% extends 'wallet/base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <p>Access your account<br>
-                <small> Log in with your secret key to manage Stellar account.</small><br>
-            </p>
-            <form method="post" action="activate" class="row g-3">
-                {% csrf_token %}
-                <input type="password" name="secret" id="secret" class="form-control" />
+<div class="container top-pad-sm">
+    <div class="col">
 
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" name="accept" type="checkbox" id="accept" value="0">
-                    <label class="form-check-label" for="accept">
-                        <small> I accept the Terms of Use, understand the risks associated with cryptocurrencies,
-                            and know that StellarTerm does not issue or endorse any asset on the Stellar
-                            network.</small>
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-primary mb-3">Login</button>
-            </form>
-        </div>
+        <h1>Access your account</h1>
+            <small> Log in with your secret key to manage Stellar account.</small><br>
+        </p>
+        <form method="post" action="activate" class="row g-3">
+            {% csrf_token %}
+            <input type="password" name="secret" id="secret" class="form-control" />
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" name="accept" type="checkbox" id="accept" value="0">
+                <label class="form-check-label" for="accept">
+                    <small> I accept the Terms of Use, understand the risks associated with cryptocurrencies,
+                        and know that StellarTerm does not issue or endorse any asset on the Stellar
+                        network.</small>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Login</button>
+        </form>
+
     </div>
 </div>
 {% endblock %}

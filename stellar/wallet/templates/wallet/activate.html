@@ -1,8 +1,8 @@
 {% extends 'wallet/base.html' %}
 
 {% block content %}
-<div class="container center-text">
-    <div class="row">
+<div class="container center-text top-pad-sm">
+    <div class="col">
 
         <h1>Account Activation Required</h1>
         To use your Stellar account, you must activate it by sending at least 5 lumens (XLM) to your
@@ -10,10 +10,16 @@
         You can buy lumens (XLM) from an exchange and send them to your address.
 
         <h2>Receive from another wallet</h2>
-
-        <img src="{{qr}}" alt="" />
         Your Wallet Account ID
         <small class="sm-txt">{{public_key}}</small>
+        <div class="row">
+            <i class="bi bi-share"></i>
+        </div>
+        <div class="row">
+            <img src="{{qr}}" alt="" />
+        </div>
+
+
     </div>
 </div>
 {% endblock %}

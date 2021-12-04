@@ -3,16 +3,16 @@
 {% block content %}
 <div class="container">
     <div class="row top-title">
-        <div class="col-4">
-            <img style="width:100%" src="{{request.session.session_data.qr}}" alt="" />
+        <div class="col-2">
+            <img style="width: 92px;margin-left: -70px;" src="{{request.session.session_data.qr}}" alt="" />
         </div>
-        <div class="col-8">
+        <div class="col-10">
             
             <h1 class="highlight">Your Wallet</h1>
             <small>To receive payments, share your account ID or scan QR code.</small>
         </div>
-        <div class="col address">
-            <div>{{request.session.session_data.id}}</div>
+        <div class="row">
+            <div><!--{{request.session.session_data.id}}--></div>
         </div>
     </div>
     <div class="row">

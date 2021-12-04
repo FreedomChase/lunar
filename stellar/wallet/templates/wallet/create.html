@@ -1,21 +1,21 @@
 {% extends 'wallet/base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container top-pad-sm">
     <div class="row">
         <div class="col">
-            <p>New Stellar account<br>
+            <h1>New Stellar account</h1>
                 To get started using the Stellar network, a new unique keypair has been generated for you. Keypair
                 represents the public and secret keys of your Stellar account..<br>
             </p>
-            <label for="key" class="form-label">Your new public key: <br> <small>Used to identify an account and
+            <label for="key" class="form-label"><b>Your new public key:</b> <br> <small>Used to identify an account and
                     receive funds and will be used as your account ID.</small></label>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon3"><i class="bi-wallet-fill"></i></span>
                 <input type="text" class="form-control" value="{{ public_key }}" id="key"
                     aria-describedby="basic-addon3">
             </div>
-            <label for="secret" class="form-label">Your new secret key:<br> <small>Used to access your account and
+            <label for="secret" class="form-label"><b>Your new secret key:</b><br> <small>Used to access your account and
                     make transactions. Anyone with the key will have full access to the account and funds. If you
                     lose the key, you will no longer be able to access the funds and there is no recovery
                     mechanism.</small></label>

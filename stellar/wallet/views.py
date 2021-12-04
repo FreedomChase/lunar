@@ -72,12 +72,17 @@ def activate(request):
     # Inactive Account:
     # It has to funded with the minimum balance of 5 XML before activation.
     # Generate QR code and deposit instructions
-    account = requests.get(account_url + public_key, data={})
-    data = account.json()
-    if data['status'] == 404:
+    try:
+        account = requests.get(account_url + public_key, data={})
+        data = account.json()
+        try:
+            data['id']
+        except NameError:
+            return render(request, template, instruct_context)
+    except exceptions.NotFoundError:
         return render(request, template, instruct_context)
 
-    # Inactive Account
+    # Active Account
     data = account.json()
     # Store some variables in the session
     request.session['wallet_id'] = data['id']
@@ -102,7 +107,7 @@ def activate(request):
 
     data_context = {
         'id': data['id'],
-        'qr': QRurl,
+        'qr': '.' + QRurl,
         'last_modified': data['last_modified_time'],
         'balances': data['balances']
     }
